@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel",
-    "build": "parcel build  src/*.html src/*.tsx src/*.ts",
+    "prebuild": "rm -rf dist/*",
+    "build": "parcel build  src/**/*.html src/**/*.tsx src/**/*.ts",
     "copy:static_files": "cp public/* dist/",
     "postbuild": "npm run copy:static_files"
   },

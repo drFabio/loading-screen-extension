@@ -12,17 +12,7 @@
   "options_page": "modules/options/index.html",
   "permissions": ["storage", "scripting", "tabs"],
   "action": {
-    "default_icon": {
-      "16": "/images/cavalo16.png",
-      "32": "/images/cavalo32.png",
-      "48": "/images/cavalo48.png",
-      "128": "/images/cavalo128.png"
-    }
+    "default_icon": {}
   },
-  "icons": {
-    "16": "/images/cavalo16.png",
-    "32": "/images/cavalo32.png",
-    "48": "/images/cavalo48.png",
-    "128": "/images/cavalo128.png"
-  }
+  "icons": {}
 }

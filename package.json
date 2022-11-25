@@ -6,7 +6,7 @@
     "test": "jest",
     "start": "parcel",
     "prebuild": "rm -rf dist/*",
-    "build": "parcel build  src/**/*.html src/**/*.tsx src/**/*.ts",
+    "build": "parcel build  src/**/*.html",
     "copy:static_files": "cp public/* dist/",
     "postbuild": "npm run copy:static_files"
   },

@@ -3,13 +3,11 @@
   "description": "Learn stuff while browsing!",
   "version": "1.0",
   "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
+  "background": {},
   "chrome_url_overrides": {
-    "newtab": "modules/newTab/index.html"
+    "newtab": "newTab/index.html"
   },
-  "options_page": "modules/options/index.html",
+  "options_page": "options/index.html",
   "permissions": ["storage", "scripting", "tabs"],
   "action": {
     "default_icon": {}

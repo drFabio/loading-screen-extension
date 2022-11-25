@@ -1,28 +1,6 @@
 import { useMemo } from "react";
+import { InputSource, SourceTypes } from "../../../types";
 
-/**
- * A source that represents a map, such as a translation
- */
-export type EquivalentSource = Record<string, string>;
-
-export type StatementSource = string[];
-
-export enum SourceTypes {
-  EQUIVALENCE,
-  STATEMENT,
-}
-
-export type InputSource =
-  | {
-      type: SourceTypes.EQUIVALENCE;
-      data: EquivalentSource;
-      name?: string;
-    }
-  | {
-      type: SourceTypes.STATEMENT;
-      data: StatementSource;
-      name?: string;
-    };
 /**
  * Loads the desired data sources returning a "randomized" source to be displayed
  * The sources will respect configuration if given

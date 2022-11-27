@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { useSettings } from "./useSettings";
 import { sources as mockSources } from "../assets/sources";
-jest.mock("../../../assets/sources", () => ({
+jest.mock("../assets/sources", () => ({
   sources: [{ id: "source 1", title: "title 1" }, { id: "source 2" }],
 }));
 
@@ -44,5 +44,5 @@ describe(`useSettings`, () => {
 
     expect(result.current.sources).toEqual(expectedResult);
   });
-  it(`can toogle activation saving `);
+  it.todo(`can toogle activation saving `);
 });

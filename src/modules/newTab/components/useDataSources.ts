@@ -19,9 +19,18 @@ export function useDataSources(
     const validSources = sources.filter(
       ({ id }) => !configuration?.deactivatedMap?.[id]
     );
+    if (!validSources.length) return null;
     const index = Math.floor(Math.random() * validSources.length);
     return validSources[index];
   }, [sources]);
+
+  if (!chosenSource) {
+    return {
+      type: SourceTypes.STATEMENT,
+      choice: "No sources, go to options to select them",
+      id: "__NO_CHOICE__",
+    };
+  }
 
   const index = Math.floor(Math.random() * chosenSource.data.length);
   const { type, value } = chosenSource.data[index];

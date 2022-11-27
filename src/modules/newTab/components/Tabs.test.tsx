@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+
 import React from "react";
 import { SourceTypes } from "../../../types";
 import { Equivalence as MockedEquivalence } from "./Equivalence";
@@ -33,6 +34,15 @@ describe(`Tabs`, () => {
       term,
       definition,
     });
+  });
+  test(`Renders statement`, () => {
+    const statement = "statement";
+    (mockedUseDataSources as jest.Mock).mockImplementation(() => ({
+      type: SourceTypes.STATEMENT,
+      choice: statement,
+    }));
+    render(<Tabs />);
+    screen.getByText(statement);
   });
   test(`Renders table`, () => {
     const header = [["header1"]];

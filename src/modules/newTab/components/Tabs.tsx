@@ -25,6 +25,10 @@ export function Tabs() {
       container = <Table {...(choice as TableSource)}></Table>;
       break;
     }
+    case SourceTypes.STATEMENT: {
+      container = <span>{choice as string}</span>;
+      break;
+    }
   }
 
   return (

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Body } from "./Body";
-import React from "react";
+import * as React from "react";
 
 describe(`Body`, () => {
   test(`Renders header`, () => {

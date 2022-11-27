@@ -32,6 +32,22 @@ describe(`useDataSources`, () => {
       choice: Object.entries(expectedSource.data[resultIndex].value)[0],
     });
   });
+  it(`Renders no choice if there is no availabel choice`, () => {
+    const configuration: SourceConfiguration = {
+      deactivatedMap: mockSources.reduce(
+        (acc, { id }) => ({ ...acc, [id]: true }),
+        {}
+      ),
+    };
+    const { result } = renderHook(() =>
+      useDataSources(mockSources, configuration)
+    );
+    expect(result.current).toEqual({
+      type: SourceTypes.STATEMENT,
+      choice: "No sources, go to options to select them",
+      id: "__NO_CHOICE__",
+    });
+  });
   it(`renders with configuration`, () => {
     jest.spyOn(global.Math, "random").mockReturnValue(0.5);
 

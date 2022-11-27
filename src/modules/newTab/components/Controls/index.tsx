@@ -50,6 +50,7 @@ export const Controls = ({
       <IconButton
         icon="minus"
         tooltip="Show less often"
+        disabled={weight <= 1}
         onClick={(e) => {
           onDecrease();
           e.preventDefault();

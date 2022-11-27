@@ -7,6 +7,15 @@
   &:hover {
     cursor: pointer;
   }
+  &:disabled {
+    opacity: 0.5;
+    &:hover {
+      cursor: not-allowed;
+    }
+    [data-tooltip] {
+      opacity: 1;
+    }
+  }
   & + & {
     margin-left: 0.5em;
   }

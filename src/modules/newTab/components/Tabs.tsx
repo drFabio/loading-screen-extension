@@ -1,4 +1,5 @@
 import { sources } from "../../../assets/sources";
+import { useSettings } from "../../../components/useSettings";
 import { getDeterministicPallette } from "../../../getDeterministicPallette";
 import { SourceTypes, TableSource } from "../../../types";
 import { Equivalence } from "./Equivalence";
@@ -7,7 +8,8 @@ import * as classes from "./Tabs.module.css";
 import { useDataSources } from "./useDataSources";
 
 export function Tabs() {
-  const { type, choice } = useDataSources(sources);
+  const { deactivatedMap } = useSettings();
+  const { type, choice } = useDataSources(sources, { deactivatedMap });
   let container: JSX.Element;
   /**
    * We want to have the same color for the same input

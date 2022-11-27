@@ -22,7 +22,7 @@ export function useDataSources(
     if (!validSources.length) return null;
     const index = Math.floor(Math.random() * validSources.length);
     return validSources[index];
-  }, [sources]);
+  }, [sources, configuration]);
 
   if (!chosenSource) {
     return {

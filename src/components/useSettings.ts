@@ -43,5 +43,5 @@ export const useSettings = () => {
     }));
   };
 
-  return { sources, toogleActivation };
+  return { sources, toogleActivation, deactivatedMap };
 };

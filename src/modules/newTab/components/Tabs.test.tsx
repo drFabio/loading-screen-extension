@@ -5,11 +5,17 @@ import { Equivalence as MockedEquivalence } from "./Equivalence";
 import { Table as MockedTable } from "./Table";
 import { Tabs } from "./Tabs";
 import { useDataSources as mockedUseDataSources } from "./useDataSources";
+import { useSettings } from "../../../components/useSettings";
 
 jest.mock("../../../getDeterministicPallette", () => ({
   getDeterministicPallette: jest.fn(() => ({
     color: "mockColor",
     backgroundColor: "mockBackgroundColor",
+  })),
+}));
+jest.mock("../../../components/useSettings", () => ({
+  useSettings: jest.fn(() => ({
+    deactivatedMap: { someId: true },
   })),
 }));
 jest.mock("./useDataSources", () => ({

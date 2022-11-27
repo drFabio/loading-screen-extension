@@ -2,6 +2,7 @@ import { sources } from "../../../assets/sources";
 import { useSettings } from "../../../components/useSettings";
 import { getDeterministicPallette } from "../../../getDeterministicPallette";
 import { SourceTypes, TableSource } from "../../../types";
+import { Controls } from "./Controls";
 import { Equivalence } from "./Equivalence";
 import { Table } from "./Table";
 import * as classes from "./Tabs.module.css";
@@ -35,6 +36,7 @@ export function Tabs() {
   return (
     <main className={classes.container} style={{ color, backgroundColor }}>
       {container}
+      <Controls />
     </main>
   );
 }

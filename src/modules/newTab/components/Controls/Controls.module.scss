@@ -1,0 +1,15 @@
+.container {
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  opacity: 0;
+  padding-left: 3rem;
+  padding-bottom: 1rem;
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -1,3 +1,5 @@
+import { getHashFromItem } from "./getHashFromItem";
+
 const ALLOWED_COLORS = [
   "#001f3f",
   "#0074d9",
@@ -23,7 +25,7 @@ const TOTAL_COLORS = ALLOWED_COLORS.length;
  */
 export function getDeterministicPallette(input: any) {
   const serializedString = JSON.stringify(input);
-  const colorIndex = serializedString
+  const colorIndex = getHashFromItem(serializedString)
     .split("")
     .reduce((acc, char) => (acc + char.charCodeAt(0)) % TOTAL_COLORS, 0);
   const deterministicColor = ALLOWED_COLORS[colorIndex];

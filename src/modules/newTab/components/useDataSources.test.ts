@@ -6,6 +6,11 @@ import {
 } from "../../../types";
 import { useDataSources } from "./useDataSources";
 
+const MOCK_HASH = "MOCK_HASH";
+jest.mock(`../../../getHashFromItem`, () => ({
+  getHashFromItem: jest.fn(() => MOCK_HASH),
+}));
+
 describe(`useDataSources`, () => {
   const mockSources = new Array(13).fill({}).map((_, index) => ({
     data: new Array(17).fill("").map(
@@ -30,6 +35,7 @@ describe(`useDataSources`, () => {
       id: expectedSource.id,
       type: expectedSource.data[resultIndex].type,
       choice: Object.entries(expectedSource.data[resultIndex].value)[0],
+      hash: MOCK_HASH,
     });
   });
   it(`Renders no choice if there is no availabel choice`, () => {
@@ -46,6 +52,7 @@ describe(`useDataSources`, () => {
       type: SourceTypes.STATEMENT,
       choice: "No sources, go to options to select them",
       id: "__NO_CHOICE__",
+      hash: MOCK_HASH,
     });
   });
   it(`renders with configuration`, () => {
@@ -69,6 +76,7 @@ describe(`useDataSources`, () => {
       id: expectedSource.id,
       type: expectedSource.data[resultIndex].type,
       choice: Object.entries(expectedSource.data[resultIndex].value)[0],
+      hash: MOCK_HASH,
     });
   });
 });

@@ -21,9 +21,11 @@ export function Tabs() {
     case SourceTypes.EQUIVALENCE: {
       const [term, definition] = choice as [string, string];
       container = <Equivalence term={term} definition={definition} />;
+      break;
     }
     case SourceTypes.TABLE: {
       container = <Table {...(choice as TableSource)}></Table>;
+      break;
     }
   }
 

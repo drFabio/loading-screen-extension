@@ -6,9 +6,10 @@
     "test": "jest",
     "start": "parcel",
     "prebuild": "rm -rf dist/*",
-    "build": "parcel build  src/**/*.html",
+    "build": "parcel build  src/**/*.html src/**/*.css src/**/*.scss",
     "copy:static_files": "cp public/* dist/",
-    "postbuild": "npm run copy:static_files"
+    "postbuild": "npm run copy:static_files",
+    "serve:tabs": "parcel src/modules/newTab/index.html src/**/*.css src/**/*.scss"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -17,6 +18,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.2.3",

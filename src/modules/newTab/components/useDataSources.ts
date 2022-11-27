@@ -9,6 +9,7 @@ import { InputSource, SourceTypes } from "../../../types";
 export function useDataSources(sources: InputSource[]) {
   const chosenSource = useMemo(() => {
     const index = Math.floor(Math.random() * sources.length);
+    console.log({ index });
     return sources[index];
   }, [sources]);
 

@@ -1,10 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { getHashFromItem } from "../../../getHashFromItem";
 import {
   EquivalenceInputSource,
   InputSource,
   SourceConfiguration,
   SourceTypes,
+  StatementInputSource,
+  TableSource,
 } from "../../../types";
 
 /**
@@ -14,18 +16,47 @@ import {
  */
 export function useDataSources(
   sources: InputSource[],
-  configuration?: SourceConfiguration
+  configuration: SourceConfiguration = {
+    initialized: true,
+    deactivatedMap: {},
+  }
 ) {
-  const chosenSource = useMemo(() => {
+  const choiceRef = useRef<{
+    type: SourceTypes;
+    hash: string;
+    id: string;
+    choice: string | TableSource | [string, string];
+  }>();
+
+  const data = useMemo(() => {
+    if (!configuration?.initialized) return null;
+
+    if (choiceRef.current) {
+      return choiceRef.current;
+    }
     const validSources = sources.filter(
       ({ id }) => !configuration?.deactivatedMap?.[id]
     );
     if (!validSources.length) return null;
     const index = Math.floor(Math.random() * validSources.length);
-    return validSources[index];
-  }, [sources, configuration]);
+    const chosenSource = validSources[index];
 
-  if (!chosenSource) {
+    const dataIndex = Math.floor(Math.random() * chosenSource.data.length);
+    const { type, value } = chosenSource.data[dataIndex];
+    const choice =
+      type === SourceTypes.EQUIVALENCE
+        ? Object.entries(value as EquivalenceInputSource["value"])[0]
+        : value;
+    const hash = getHashFromItem(choice);
+    choiceRef.current = {
+      hash,
+      choice,
+      type,
+      id: chosenSource.id,
+    };
+    return choiceRef.current;
+  }, [sources, configuration]);
+  if (!data) {
     const choice = "No sources, go to options to select them";
     return {
       type: SourceTypes.STATEMENT,
@@ -35,18 +66,5 @@ export function useDataSources(
     };
   }
 
-  const index = Math.floor(Math.random() * chosenSource.data.length);
-  const { type, value } = chosenSource.data[index];
-
-  const choice =
-    type === SourceTypes.EQUIVALENCE
-      ? Object.entries(value as EquivalenceInputSource["value"])[0]
-      : value;
-  const hash = getHashFromItem(choice);
-  return {
-    type: type,
-    id: chosenSource.id,
-    choice,
-    hash,
-  };
+  return data;
 }

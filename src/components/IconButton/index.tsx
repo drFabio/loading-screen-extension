@@ -5,8 +5,12 @@ import * as classes from "./IconButton.module.scss";
 export type IconButtonProps = {
   icon: "hide" | "plus" | "minus";
   tooltip?: string;
-};
-export const IconButton = ({ icon, tooltip }: IconButtonProps) => {
+} & React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+export const IconButton = ({ icon, tooltip, ...props }: IconButtonProps) => {
   let iconComponent: ReactNode;
   switch (icon) {
     case "hide":
@@ -20,7 +24,7 @@ export const IconButton = ({ icon, tooltip }: IconButtonProps) => {
       break;
   }
   return (
-    <button className={classes.iconButton}>
+    <button className={classes.iconButton} {...props}>
       <span data-tooltip={tooltip}>?</span>
       {iconComponent}
     </button>

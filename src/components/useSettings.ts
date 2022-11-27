@@ -17,6 +17,8 @@ export const useSettings = () => {
     Record<string, Record<string, number>>
   >({});
 
+  const [initialized, setInitialized] = useState<boolean>(false);
+
   useEffect(() => {
     const savedDeactivatedMap: Record<string, boolean> = JSON.parse(
       localStorage.getItem("deactivatedMap") || `{}`
@@ -30,6 +32,7 @@ export const useSettings = () => {
     setDeactivatedMap(savedDeactivatedMap);
     setHideMap(savedHideMap);
     setWeightMap(savedWeightMap);
+    setInitialized(true);
   }, [setDeactivatedMap]);
   /**
    * @todo implement adding different sources
@@ -97,5 +100,6 @@ export const useSettings = () => {
     increaseWeight,
     decreaseWeight,
     hideItem,
+    initialized,
   };
 };

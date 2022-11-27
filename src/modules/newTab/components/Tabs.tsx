@@ -9,8 +9,17 @@ import * as classes from "./Tabs.module.css";
 import { useDataSources } from "./useDataSources";
 
 export function Tabs() {
-  const { deactivatedMap } = useSettings();
-  const { type, choice } = useDataSources(sources, { deactivatedMap });
+  const {
+    deactivatedMap,
+    increaseWeight,
+    decreaseWeight,
+    hideItem,
+    initialized,
+  } = useSettings();
+  const { type, choice, hash, id } = useDataSources(sources, {
+    deactivatedMap,
+    initialized,
+  });
   let container: JSX.Element;
   /**
    * We want to have the same color for the same input
@@ -36,7 +45,17 @@ export function Tabs() {
   return (
     <main className={classes.container} style={{ color, backgroundColor }}>
       {container}
-      <Controls />
+      <Controls
+        onDecrease={() => {
+          decreaseWeight(id, hash);
+        }}
+        onHide={() => {
+          hideItem(id, hash);
+        }}
+        onIncrease={() => {
+          increaseWeight(id, hash);
+        }}
+      />
     </main>
   );
 }

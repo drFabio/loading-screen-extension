@@ -36,4 +36,5 @@ export type InputSource = {
 
 export type SourceConfiguration = {
   deactivatedMap: Record<string, boolean>;
+  initialized: boolean;
 };

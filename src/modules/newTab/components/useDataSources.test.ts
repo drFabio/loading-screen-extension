@@ -40,6 +40,7 @@ describe(`useDataSources`, () => {
   });
   it(`Renders no choice if there is no availabel choice`, () => {
     const configuration: SourceConfiguration = {
+      initialized: true,
       deactivatedMap: mockSources.reduce(
         (acc, { id }) => ({ ...acc, [id]: true }),
         {}
@@ -60,6 +61,7 @@ describe(`useDataSources`, () => {
 
     const activeSourceId = mockSources[0].id;
     const configuration: SourceConfiguration = {
+      initialized: true,
       deactivatedMap: mockSources.reduce(
         (acc, { id }) => ({ ...acc, [id]: id !== activeSourceId }),
         {}

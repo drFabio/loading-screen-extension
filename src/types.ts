@@ -33,3 +33,7 @@ export type InputSource = {
   title?: string;
   data: (EquivalenceInputSource | StatementInputSource | TableInputSource)[];
 };
+
+export type SourceConfiguration = {
+  deactivatedMap: Record<string, boolean>;
+};

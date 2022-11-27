@@ -1,5 +1,9 @@
 import { renderHook } from "@testing-library/react";
-import { EquivalenceInputSource, SourceTypes } from "../../../types";
+import {
+  EquivalenceInputSource,
+  SourceConfiguration,
+  SourceTypes,
+} from "../../../types";
 import { useDataSources } from "./useDataSources";
 
 describe(`useDataSources`, () => {
@@ -28,5 +32,27 @@ describe(`useDataSources`, () => {
       choice: Object.entries(expectedSource.data[resultIndex].value)[0],
     });
   });
-  it.todo(`renders with configuration`);
+  it(`renders with configuration`, () => {
+    jest.spyOn(global.Math, "random").mockReturnValue(0.5);
+
+    const activeSourceId = mockSources[0].id;
+    const configuration: SourceConfiguration = {
+      deactivatedMap: mockSources.reduce(
+        (acc, { id }) => ({ ...acc, [id]: id !== activeSourceId }),
+        {}
+      ),
+    };
+    const expectedSource = mockSources[0];
+    const resultIndex = Math.floor(0.5 * 17);
+
+    const { result } = renderHook(() =>
+      useDataSources(mockSources, configuration)
+    );
+
+    expect(result.current).toEqual({
+      id: expectedSource.id,
+      type: expectedSource.data[resultIndex].type,
+      choice: Object.entries(expectedSource.data[resultIndex].value)[0],
+    });
+  });
 });

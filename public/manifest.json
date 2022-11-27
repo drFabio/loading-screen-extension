@@ -5,9 +5,9 @@
   "manifest_version": 3,
   "background": {},
   "chrome_url_overrides": {
-    "newtab": "modules/newTab/index.html"
+    "newtab": "src/modules/newTab/index.html"
   },
-  "options_page": "modules/options/index.html",
+  "options_page": "src/modules/options/index.html",
   "permissions": ["storage", "scripting", "tabs"],
   "action": {
     "default_icon": {}

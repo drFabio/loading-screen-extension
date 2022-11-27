@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import {
   EquivalenceInputSource,
   InputSource,
+  SourceConfiguration,
   SourceTypes,
 } from "../../../types";
 
@@ -10,10 +11,16 @@ import {
  * The sources will respect configuration if given
  * @param sources
  */
-export function useDataSources(sources: InputSource[]) {
+export function useDataSources(
+  sources: InputSource[],
+  configuration?: SourceConfiguration
+) {
   const chosenSource = useMemo(() => {
-    const index = Math.floor(Math.random() * sources.length);
-    return sources[index];
+    const validSources = sources.filter(
+      ({ id }) => !configuration?.deactivatedMap?.[id]
+    );
+    const index = Math.floor(Math.random() * validSources.length);
+    return validSources[index];
   }, [sources]);
 
   const index = Math.floor(Math.random() * chosenSource.data.length);

@@ -1,10 +1,11 @@
 import React from "react";
 import { sources } from "../../../assets/de-en/sources";
-import { SourceTypes } from "../../../types";
+import { SourceTypes, TableSource } from "../../../types";
 import { Equivalence } from "./Equivalence";
 import { useDataSources } from "./useDataSources";
 import * as classes from "./Tabs.module.css";
 import { getDeterministicPallette } from "../../../getDeterministicPallette";
+import { Table } from "./Table";
 
 export function Tabs() {
   const { type, choice } = useDataSources(sources);
@@ -16,11 +17,14 @@ export function Tabs() {
    */
   const { color, backgroundColor } = getDeterministicPallette(choice);
 
-  if (type === SourceTypes.EQUIVALENCE) {
-    const [term, definition] = choice as [string, string];
-    container = <Equivalence term={term} definition={definition} />;
-  } else {
-    container = <></>;
+  switch (type) {
+    case SourceTypes.EQUIVALENCE: {
+      const [term, definition] = choice as [string, string];
+      container = <Equivalence term={term} definition={definition} />;
+    }
+    case SourceTypes.TABLE: {
+      container = <Table {...(choice as TableSource)}></Table>;
+    }
   }
 
   return (

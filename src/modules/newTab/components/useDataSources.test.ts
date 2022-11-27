@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react";
-import { SourceTypes, useDataSources } from "./useDataSources";
+import { SourceTypes } from "../../../types";
+import { useDataSources } from "./useDataSources";
 
 describe(`useDataSources`, () => {
   const mockSources = new Array(13).fill({}).map((_, index) => ({

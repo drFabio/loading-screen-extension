@@ -1,4 +1,3 @@
-import React from "react";
 import { useSettings } from "../../../components/useSettings";
 import * as classes from "./Options.module.scss";
 

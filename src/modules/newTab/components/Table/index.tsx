@@ -1,4 +1,3 @@
-import React from "react";
 import { TableSource } from "../../../../types";
 import { Body } from "./Body";
 import * as classes from "./Table.module.scss";

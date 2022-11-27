@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import type { RowSource } from "../../../../types";
 import { Cell } from "./Cell";
 

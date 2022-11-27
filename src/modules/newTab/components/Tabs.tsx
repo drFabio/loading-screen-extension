@@ -1,4 +1,3 @@
-import React from "react";
 import { sources } from "../../../assets/sources";
 import { getDeterministicPallette } from "../../../getDeterministicPallette";
 import { SourceTypes, TableSource } from "../../../types";

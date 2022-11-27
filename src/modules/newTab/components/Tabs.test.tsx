@@ -1,7 +1,5 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-
-import React from "react";
 import { SourceTypes } from "../../../types";
 import { Equivalence as MockedEquivalence } from "./Equivalence";
 import { Table as MockedTable } from "./Table";

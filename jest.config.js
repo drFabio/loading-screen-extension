@@ -1,12 +1,7 @@
 module.exports = {
   roots: ["<rootDir>/src"],
   transform: {
-    "^.+\\.tsx?$": [
-      "ts-jest",
-      {
-        tsconfig: "jest.tsconfig.json",
-      },
-    ],
+    "^.+\\.tsx?$": ["ts-jest"],
   },
 
   testEnvironment: "jsdom",

@@ -28,13 +28,19 @@ export type TableSource = {
 };
 export type TableInputSource = Source<SourceTypes.TABLE, TableSource>;
 
+export type DataSource =
+  | EquivalenceInputSource
+  | StatementInputSource
+  | TableInputSource;
 export type InputSource = {
   id: string;
   title?: string;
-  data: (EquivalenceInputSource | StatementInputSource | TableInputSource)[];
+  data: DataSource[];
 };
 
 export type SourceConfiguration = {
   deactivatedMap: Record<string, boolean>;
   initialized: boolean;
+  hideMap: Record<string, Record<string, boolean>>;
+  weightMap: Record<string, Record<string, number>>;
 };

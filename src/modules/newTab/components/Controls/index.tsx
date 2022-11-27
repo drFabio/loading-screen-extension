@@ -15,6 +15,7 @@ export const Controls = ({
   onIncrease,
   onDecrease,
   isHidden,
+  weight,
 }: ControlProps) => {
   return (
     <nav className={classes.container}>
@@ -38,7 +39,6 @@ export const Controls = ({
           }}
         />
       )}
-
       <IconButton
         icon="plus"
         tooltip="Show more often"
@@ -55,6 +55,7 @@ export const Controls = ({
           e.preventDefault();
         }}
       />
+      ({weight || 1})
     </nav>
   );
 };

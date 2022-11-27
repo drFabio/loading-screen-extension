@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
 import { getHashFromItem } from "../../../getHashFromItem";
 import {
+  DataSource,
   EquivalenceInputSource,
   InputSource,
   SourceConfiguration,
@@ -19,6 +20,8 @@ export function useDataSources(
   configuration: SourceConfiguration = {
     initialized: true,
     deactivatedMap: {},
+    hideMap: {},
+    weightMap: {},
   }
 ) {
   const choiceRef = useRef<{
@@ -41,8 +44,22 @@ export function useDataSources(
     const index = Math.floor(Math.random() * validSources.length);
     const chosenSource = validSources[index];
 
-    const dataIndex = Math.floor(Math.random() * chosenSource.data.length);
-    const { type, value } = chosenSource.data[dataIndex];
+    const id = chosenSource.id;
+
+    const hashDataMap: Record<string, DataSource> = {};
+
+    let weightedHashes: string[] = chosenSource.data.reduce((acc, data) => {
+      const hash = getHashFromItem(data.value);
+      const shown = !configuration?.hideMap?.[id]?.[hash];
+      if (!shown) return acc;
+      const weight = configuration?.weightMap?.[id]?.[hash] ?? 1;
+      hashDataMap[hash] = data;
+
+      return acc.concat(new Array(weight).fill(hash));
+    }, []);
+
+    const dataIndex = Math.floor(Math.random() * weightedHashes.length);
+    const { type, value } = hashDataMap[weightedHashes[dataIndex]];
     const hash = getHashFromItem(value);
 
     const choice =
@@ -53,10 +70,11 @@ export function useDataSources(
       hash,
       choice,
       type,
-      id: chosenSource.id,
+      id,
     };
     return choiceRef.current;
   }, [sources, configuration]);
+
   if (!data) {
     const choice = "No sources, go to options to select them";
     return {

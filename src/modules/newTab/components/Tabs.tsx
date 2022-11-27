@@ -17,17 +17,22 @@ export function Tabs() {
     hideMap,
     initialized,
     showItem,
+    weightMap,
   } = useSettings();
+
   const { type, choice, hash, id } = useDataSources(sources, {
     deactivatedMap,
     initialized,
+    hideMap,
+    weightMap,
   });
+
   let container: JSX.Element;
   /**
    * We want to have the same color for the same input
    * So people can associate them better in case they show up more than once
    */
-  const { color, backgroundColor } = getDeterministicPallette(choice);
+  const { color, backgroundColor } = getDeterministicPallette(hash);
   switch (type) {
     case SourceTypes.EQUIVALENCE: {
       const [term, definition] = choice as [string, string];
@@ -48,6 +53,7 @@ export function Tabs() {
     <main className={classes.container} style={{ color, backgroundColor }}>
       {container}
       <Controls
+        weight={weightMap?.[id]?.[hash]}
         onDecrease={() => {
           decreaseWeight(id, hash);
         }}

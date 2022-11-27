@@ -77,7 +77,7 @@ export const ItemDisplay = ({
           }}
         />
       }
-      <span className={classes.text}>{displayText}</span> ({weight || 0})
+      <span className={classes.text}>{displayText}</span> ({weight || 1})
     </>
   );
 };

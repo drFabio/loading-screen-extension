@@ -23,9 +23,8 @@ const TOTAL_COLORS = ALLOWED_COLORS.length;
  * @param input
  * @returns a deterministic color for that input
  */
-export function getDeterministicPallette(input: any) {
-  const serializedString = JSON.stringify(input);
-  const colorIndex = getHashFromItem(serializedString)
+export function getDeterministicPallette(hash: string) {
+  const colorIndex = hash
     .split("")
     .reduce((acc, char) => (acc + char.charCodeAt(0)) % TOTAL_COLORS, 0);
   const deterministicColor = ALLOWED_COLORS[colorIndex];

@@ -78,7 +78,10 @@ export const useSettings = () => {
       ...previousWeightMap,
       [sourceId]: {
         ...previousWeightMap?.[sourceId],
-        [itemHash]: (previousWeightMap?.[sourceId]?.[itemHash] || 0) - 1,
+        [itemHash]: Math.max(
+          1,
+          (previousWeightMap?.[sourceId]?.[itemHash] || 0) - 1
+        ),
       },
     }));
   };

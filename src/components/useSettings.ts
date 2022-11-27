@@ -9,12 +9,27 @@ export const useSettings = () => {
   const [deactivatedMap, setDeactivatedMap] = useState<Record<string, boolean>>(
     {}
   );
+  const [hideMap, setHideMap] = useState<
+    Record<string, Record<string, boolean>>
+  >({});
+
+  const [weightMap, setWeightMap] = useState<
+    Record<string, Record<string, number>>
+  >({});
 
   useEffect(() => {
-    const savedActivationMap: Record<string, boolean> = JSON.parse(
-      localStorage.getItem("activationMap") || `{}`
+    const savedDeactivatedMap: Record<string, boolean> = JSON.parse(
+      localStorage.getItem("deactivatedMap") || `{}`
     );
-    setDeactivatedMap(savedActivationMap);
+    const savedHideMap: Record<string, Record<string, boolean>> = JSON.parse(
+      localStorage.getItem("hideMap") || `{}`
+    );
+    const savedWeightMap: Record<string, Record<string, number>> = JSON.parse(
+      localStorage.getItem("weightMap") || `{}`
+    );
+    setDeactivatedMap(savedDeactivatedMap);
+    setHideMap(savedHideMap);
+    setWeightMap(savedWeightMap);
   }, [setDeactivatedMap]);
   /**
    * @todo implement adding different sources
@@ -31,10 +46,12 @@ export const useSettings = () => {
 
   useEffect(() => {
     const storeData = () => {
-      localStorage.setItem("activationMap", JSON.stringify(deactivatedMap));
+      localStorage.setItem("deactivatedMap", JSON.stringify(deactivatedMap));
+      localStorage.setItem("hideMap", JSON.stringify(hideMap));
+      localStorage.setItem("weightMap", JSON.stringify(weightMap));
     };
     storeData();
-  }, [deactivatedMap]);
+  }, [deactivatedMap, hideMap, weightMap]);
 
   const toogleActivation = (id: string) => {
     setDeactivatedMap((oldMap) => ({
@@ -43,5 +60,42 @@ export const useSettings = () => {
     }));
   };
 
-  return { sources, toogleActivation, deactivatedMap };
+  const increaseWeight = (sourceId: string, itemHash: string) => {
+    setWeightMap((previousWeightMap) => ({
+      ...previousWeightMap,
+      [sourceId]: {
+        ...previousWeightMap?.[sourceId],
+        [itemHash]: (previousWeightMap?.[sourceId]?.[itemHash] || 0) + 1,
+      },
+    }));
+  };
+  const decreaseWeight = (sourceId: string, itemHash: string) => {
+    setWeightMap((previousWeightMap) => ({
+      ...previousWeightMap,
+      [sourceId]: {
+        ...previousWeightMap?.[sourceId],
+        [itemHash]: (previousWeightMap?.[sourceId]?.[itemHash] || 0) - 1,
+      },
+    }));
+  };
+  const hideItem = (sourceId: string, itemHash: string) => {
+    setHideMap((previousHideMap) => ({
+      ...previousHideMap,
+      [sourceId]: {
+        ...previousHideMap?.[sourceId],
+        [itemHash]: true,
+      },
+    }));
+  };
+
+  return {
+    sources,
+    toogleActivation,
+    deactivatedMap,
+    hideMap,
+    weightMap,
+    increaseWeight,
+    decreaseWeight,
+    hideItem,
+  };
 };

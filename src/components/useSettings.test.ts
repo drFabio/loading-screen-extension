@@ -1,27 +1,44 @@
 import { renderHook } from "@testing-library/react";
 import { useSettings } from "./useSettings";
 import { sources as mockSources } from "../assets/sources";
+import { act } from "react-dom/test-utils";
 jest.mock("../assets/sources", () => ({
   sources: [{ id: "source 1", title: "title 1" }, { id: "source 2" }],
 }));
 
 describe(`useSettings`, () => {
-  let mockGetItem: jest.Mock;
-  let mockSetItem: jest.Mock;
+  let mockGetItem: jest.SpyInstance;
+  let mockSetItem: jest.SpyInstance;
+  const savedDeactivatedMap = {
+    [mockSources[1].id]: true,
+  };
+  const savedHideMap = {
+    [mockSources[1].id]: {
+      hash1: true,
+    },
+  };
 
+  const savedWeightMap = {
+    [mockSources[1].id]: {
+      hash2: 5,
+    },
+  };
+  const savedLocalStorage = {
+    deactivatedMap: JSON.stringify(savedDeactivatedMap),
+    hideMap: JSON.stringify(savedHideMap),
+    weightMap: JSON.stringify(savedWeightMap),
+  };
   beforeEach(() => {
-    mockGetItem = jest.fn();
-
-    mockSetItem = jest.fn();
-    jest.spyOn(Storage.prototype, "getItem");
-    Storage.prototype.getItem = mockGetItem;
-    Storage.prototype.setItem = mockSetItem;
-  });
-  it(`renders listing sources`, () => {
     /**
      * @see {@link https://github.com/jsdom/jsdom/issues/2318}
      */
-    jest.spyOn(Storage.prototype, "getItem");
+    mockGetItem = jest.spyOn(Storage.prototype, "getItem");
+    mockGetItem.mockImplementation((key) => {
+      return savedLocalStorage[key];
+    });
+    mockSetItem = jest.spyOn(Storage.prototype, "setItem");
+  });
+  it(`renders listing sources`, () => {
     mockGetItem.mockImplementation(() =>
       JSON.stringify({
         [mockSources[1].id]: true,
@@ -44,5 +61,68 @@ describe(`useSettings`, () => {
 
     expect(result.current.sources).toEqual(expectedResult);
   });
-  it.todo(`can toogle activation saving `);
+  it(`Toogles activation saving`, () => {
+    const { result } = renderHook(() => useSettings());
+
+    act(() => {
+      result.current.toogleActivation(mockSources[1].id);
+    });
+    expect(mockSetItem).toHaveBeenCalledWith(
+      "deactivatedMap",
+      JSON.stringify({
+        [mockSources[1].id]: false,
+      })
+    );
+  });
+  it(`Hides item`, () => {
+    const { result } = renderHook(() => useSettings());
+    const hash = `newHash`;
+    act(() => {
+      result.current.hideItem(mockSources[1].id, hash);
+    });
+    expect(mockSetItem).toHaveBeenCalledWith(
+      "hideMap",
+      JSON.stringify({
+        ...savedHideMap,
+        [mockSources[1].id]: {
+          ...savedHideMap[mockSources[1].id],
+          [hash]: true,
+        },
+      })
+    );
+  });
+  it(`Decreases weight`, () => {
+    const { result } = renderHook(() => useSettings());
+    const hash = `hash2`;
+    act(() => {
+      result.current.decreaseWeight(mockSources[1].id, hash);
+    });
+    expect(mockSetItem).toHaveBeenCalledWith(
+      "weightMap",
+      JSON.stringify({
+        ...savedWeightMap,
+        [mockSources[1].id]: {
+          ...savedWeightMap[mockSources[1].id],
+          [hash]: savedWeightMap[mockSources[1].id][hash] - 1,
+        },
+      })
+    );
+  });
+  it(`increases weight`, () => {
+    const { result } = renderHook(() => useSettings());
+    const hash = `hash2`;
+    act(() => {
+      result.current.increaseWeight(mockSources[1].id, hash);
+    });
+    expect(mockSetItem).toHaveBeenCalledWith(
+      "weightMap",
+      JSON.stringify({
+        ...savedWeightMap,
+        [mockSources[1].id]: {
+          ...savedWeightMap[mockSources[1].id],
+          [hash]: savedWeightMap[mockSources[1].id][hash] + 1,
+        },
+      })
+    );
+  });
 });

@@ -21,7 +21,13 @@ const dictionaryData: EquivalenceInputSource[] = Object.keys(words).map(
   })
 );
 
-export const deEnSource: InputSource = {
-  id: "de-en",
-  data: [...dictionaryData, ...tableData],
+export const deEnVocubalary: InputSource = {
+  id: "de-en-vocabulary",
+  title: "German to english - Vocubalary",
+  data: dictionaryData,
+};
+export const deEnGrammar: InputSource = {
+  id: "de-en-grammar",
+  title: "German to english - grammar",
+  data: tableData,
 };

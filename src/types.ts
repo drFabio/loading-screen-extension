@@ -29,6 +29,7 @@ export type TableSource = {
 export type TableInputSource = Source<SourceTypes.TABLE, TableSource>;
 
 export type InputSource = {
-  id?: string;
+  id: string;
+  title?: string;
   data: (EquivalenceInputSource | StatementInputSource | TableInputSource)[];
 };

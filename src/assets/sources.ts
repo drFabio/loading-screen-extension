@@ -1,3 +1,3 @@
-import { deEnSource } from "./de-en/sources";
+import { deEnGrammar, deEnVocubalary } from "./de-en/sources";
 
-export const sources = [deEnSource];
+export const sources = [deEnVocubalary, deEnGrammar];

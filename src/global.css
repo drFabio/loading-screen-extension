@@ -1,30 +1,47 @@
 :root {
-    --primary-color: #f9ba00;
-    --primary-bg: #000;
+  --primary-color: #f9ba00;
+  --primary-bg: #000;
 }
 body {
-    margin: 0;
+  margin: 0;
 }
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
-dl , dd{
-    margin: 0;
+dl,
+dd {
+  margin: 0;
 }
 #app {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 section {
-    width: 100%;
-    padding-left: 1rem;
+  width: 100%;
+  padding-left: 1rem;
 }
 main {
-    width: 100%;
-    height: 100%;
-    display: flex;
-  }
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+ul,
+li {
+  list-style-type: none;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+  margin-right: 0.5rem;
+}

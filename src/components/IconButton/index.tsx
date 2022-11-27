@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import * as classes from "./IconButton.module.scss";
 
 export type IconButtonProps = {
-  icon: "hide" | "plus" | "minus";
+  icon: "hide" | "plus" | "minus" | "show";
   tooltip?: string;
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -15,6 +15,9 @@ export const IconButton = ({ icon, tooltip, ...props }: IconButtonProps) => {
   switch (icon) {
     case "hide":
       iconComponent = <Unicons.UilEyeSlash />;
+      break;
+    case "show":
+      iconComponent = <Unicons.UilEye />;
       break;
     case "plus":
       iconComponent = <Unicons.UilPlusCircle />;

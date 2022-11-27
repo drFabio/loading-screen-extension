@@ -3,20 +3,42 @@ import { IconButton } from "../../../../components/IconButton";
 
 export type ControlProps = {
   onHide: () => void;
+  onShow: () => void;
   onIncrease: () => void;
   onDecrease: () => void;
+  isHidden?: boolean;
+  weight?: number;
 };
-export const Controls = ({ onHide, onIncrease, onDecrease }: ControlProps) => {
+export const Controls = ({
+  onHide,
+  onShow,
+  onIncrease,
+  onDecrease,
+  isHidden,
+}: ControlProps) => {
   return (
     <nav className={classes.container}>
-      <IconButton
-        icon="hide"
-        tooltip="Hide this"
-        onClick={(e) => {
-          onHide();
-          e.preventDefault();
-        }}
-      />
+      {!isHidden && (
+        <IconButton
+          icon="hide"
+          tooltip="Hide this"
+          onClick={(e) => {
+            onHide();
+            e.preventDefault();
+          }}
+        />
+      )}
+      {isHidden && (
+        <IconButton
+          icon="show"
+          tooltip="Show this"
+          onClick={(e) => {
+            onShow();
+            e.preventDefault();
+          }}
+        />
+      )}
+
       <IconButton
         icon="plus"
         tooltip="Show more often"

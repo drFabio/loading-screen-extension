@@ -91,6 +91,23 @@ describe(`useSettings`, () => {
       })
     );
   });
+  it(`Show item`, () => {
+    const { result } = renderHook(() => useSettings());
+    const hash = `hash1`;
+    act(() => {
+      result.current.showItem(mockSources[1].id, hash);
+    });
+    expect(mockSetItem).toHaveBeenCalledWith(
+      "hideMap",
+      JSON.stringify({
+        ...savedHideMap,
+        [mockSources[1].id]: {
+          ...savedHideMap[mockSources[1].id],
+          [hash]: false,
+        },
+      })
+    );
+  });
   it(`Decreases weight`, () => {
     const { result } = renderHook(() => useSettings());
     const hash = `hash2`;

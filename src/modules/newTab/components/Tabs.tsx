@@ -14,7 +14,9 @@ export function Tabs() {
     increaseWeight,
     decreaseWeight,
     hideItem,
+    hideMap,
     initialized,
+    showItem,
   } = useSettings();
   const { type, choice, hash, id } = useDataSources(sources, {
     deactivatedMap,
@@ -52,9 +54,13 @@ export function Tabs() {
         onHide={() => {
           hideItem(id, hash);
         }}
+        onShow={() => {
+          showItem(id, hash);
+        }}
         onIncrease={() => {
           increaseWeight(id, hash);
         }}
+        isHidden={hideMap?.[id]?.[hash]}
       />
     </main>
   );

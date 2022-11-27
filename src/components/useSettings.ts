@@ -90,6 +90,15 @@ export const useSettings = () => {
       },
     }));
   };
+  const showItem = (sourceId: string, itemHash: string) => {
+    setHideMap((previousHideMap) => ({
+      ...previousHideMap,
+      [sourceId]: {
+        ...previousHideMap?.[sourceId],
+        [itemHash]: false,
+      },
+    }));
+  };
 
   return {
     sources,
@@ -101,5 +110,6 @@ export const useSettings = () => {
     decreaseWeight,
     hideItem,
     initialized,
+    showItem,
   };
 };

@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { sources as staticSources } from "../../../assets/sources";
-import { InputSource } from "../../../types";
+import { InputSource } from "../types";
+import { sources as staticSources } from "../assets/sources";
 
 /**
  * List the available data sources to consider
  */
-export const useDataSourceSelection = () => {
+export const useSettings = () => {
   const [deactivatedMap, setDeactivatedMap] = useState<Record<string, boolean>>(
     {}
   );

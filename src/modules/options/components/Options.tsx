@@ -1,9 +1,9 @@
 import React from "react";
+import { useSettings } from "../../../components/useSettings";
 import * as classes from "./Options.module.scss";
-import { useDataSourceSelection } from "./useDataSourceSelection";
 
 export function Options() {
-  const { sources, toogleActivation } = useDataSourceSelection();
+  const { sources, toogleActivation } = useSettings();
   return (
     <main className={classes.container}>
       <section>

@@ -1,12 +1,11 @@
 import { renderHook } from "@testing-library/react";
-import { useDataSourceSelection } from "./useDataSourceSelection";
-import { sources as mockSources } from "../../../assets/sources";
-
+import { useSettings } from "./useSettings";
+import { sources as mockSources } from "../assets/sources";
 jest.mock("../../../assets/sources", () => ({
   sources: [{ id: "source 1", title: "title 1" }, { id: "source 2" }],
 }));
 
-describe(`useDataSourceSelection`, () => {
+describe(`useSettings`, () => {
   let mockGetItem: jest.Mock;
   let mockSetItem: jest.Mock;
 
@@ -41,7 +40,7 @@ describe(`useDataSourceSelection`, () => {
         id: mockSources[1].id,
       },
     ];
-    const { result } = renderHook(() => useDataSourceSelection());
+    const { result } = renderHook(() => useSettings());
 
     expect(result.current.sources).toEqual(expectedResult);
   });

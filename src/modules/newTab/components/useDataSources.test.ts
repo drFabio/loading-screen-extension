@@ -1,18 +1,19 @@
 import { renderHook } from "@testing-library/react";
-import { SourceTypes } from "../../../types";
+import { EquivalenceInputSource, SourceTypes } from "../../../types";
 import { useDataSources } from "./useDataSources";
 
 describe(`useDataSources`, () => {
   const mockSources = new Array(13).fill({}).map((_, index) => ({
-    data: new Array(17).fill("").reduce(
-      (acc, _, index) => ({
-        ...acc,
-        [`data ${index}`]: `data ${index}`,
-      }),
-      {}
+    data: new Array(17).fill("").map(
+      (_, index) =>
+        ({
+          type: SourceTypes.EQUIVALENCE,
+          value: {
+            [`data ${index}`]: `data ${index}`,
+          },
+        } as EquivalenceInputSource)
     ),
-    name: `source ${index}`,
-    type: SourceTypes.EQUIVALENCE,
+    id: `source ${index}`,
   }));
 
   it(`renders without configuration`, () => {
@@ -20,12 +21,11 @@ describe(`useDataSources`, () => {
     const expectedSource = mockSources[Math.floor(0.5 * 13)];
     const resultIndex = Math.floor(0.5 * 17);
 
-    const expectedData = Object.entries(expectedSource.data)[resultIndex];
     const { result } = renderHook(() => useDataSources(mockSources));
     expect(result.current).toEqual({
-      name: expectedSource.name,
-      type: expectedSource.type,
-      choice: expectedData,
+      id: expectedSource.id,
+      type: expectedSource.data[resultIndex].type,
+      choice: Object.entries(expectedSource.data[resultIndex].value)[0],
     });
   });
   it.todo(`renders with configuration`);

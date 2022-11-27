@@ -1,27 +1,20 @@
-/**
- * A source that represents a map, such as a translation
- */
-export type EquivalentSource = Record<string, string>;
-
-export type StatementSource = string[];
-
 export enum SourceTypes {
   EQUIVALENCE,
   STATEMENT,
   TABLE,
 }
 
-export type EquivalenceInputSource = {
-  type: SourceTypes.EQUIVALENCE;
-  data: EquivalentSource;
-  name?: string;
+export type Source<type, SourceType> = {
+  value: SourceType;
+  type: type;
 };
 
-export type StatementInputSource = {
-  type: SourceTypes.STATEMENT;
-  data: StatementSource;
-  name?: string;
-};
+export type EquivalenceInputSource = Source<
+  SourceTypes.EQUIVALENCE,
+  Record<string, string>
+>;
+
+export type StatementInputSource = Source<SourceTypes.STATEMENT, string>;
 
 export type CellSource =
   | string
@@ -33,13 +26,9 @@ export type TableSource = {
   rows: RowSource[];
   title?: string;
 };
-export type TableInputSource = {
-  type: SourceTypes.TABLE;
-  name?: string;
-  data: TableSource[];
-};
+export type TableInputSource = Source<SourceTypes.TABLE, TableSource>;
 
-export type InputSource =
-  | EquivalenceInputSource
-  | StatementInputSource
-  | TableInputSource;
+export type InputSource = {
+  id?: string;
+  data: (EquivalenceInputSource | StatementInputSource | TableInputSource)[];
+};

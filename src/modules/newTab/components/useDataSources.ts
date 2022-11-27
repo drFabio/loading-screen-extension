@@ -1,5 +1,9 @@
 import { useMemo } from "react";
-import { InputSource, SourceTypes } from "../../../types";
+import {
+  EquivalenceInputSource,
+  InputSource,
+  SourceTypes,
+} from "../../../types";
 
 /**
  * Loads the desired data sources returning a "randomized" source to be displayed
@@ -12,16 +16,14 @@ export function useDataSources(sources: InputSource[]) {
     return sources[index];
   }, [sources]);
 
-  const data =
-    chosenSource.type === SourceTypes.EQUIVALENCE
-      ? Object.entries(chosenSource.data)
-      : chosenSource.data;
-
-  const index = Math.floor(Math.random() * data.length);
-
+  const index = Math.floor(Math.random() * chosenSource.data.length);
+  const { type, value } = chosenSource.data[index];
   return {
-    type: chosenSource.type,
-    name: chosenSource.name,
-    choice: data[index],
+    type: type,
+    id: chosenSource.id,
+    choice:
+      type === SourceTypes.EQUIVALENCE
+        ? Object.entries(value as EquivalenceInputSource["value"])[0]
+        : value,
   };
 }

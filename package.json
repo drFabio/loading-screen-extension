@@ -9,7 +9,8 @@
     "build": "parcel build  src/**/*.html src/**/*.css src/**/*.scss",
     "copy:static_files": "cp public/* dist/",
     "postbuild": "npm run copy:static_files",
-    "serve:tabs": "parcel src/modules/newTab/index.html  src/**/*.css src/**/*.scss"
+    "serve:tabs": "parcel src/modules/newTab/index.html  src/**/*.css src/**/*.scss",
+    "serve:options": "parcel src/modules/options/index.html  src/**/*.css src/**/*.scss"
   },
   "author": "",
   "license": "UNLICENSED",

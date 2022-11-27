@@ -1,3 +1,7 @@
+:root {
+    --primary-color: #f9ba00;
+    --primary-bg: #000;
+}
 body {
     margin: 0;
 }
@@ -14,3 +18,13 @@ dl , dd{
     width: 100%;
     height: 100%;
 }
+
+section {
+    width: 100%;
+    padding-left: 1rem;
+}
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }

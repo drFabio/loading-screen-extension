@@ -1,0 +1,12 @@
+.container {
+  background-color: black;
+  color: white;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  align-content: flex-start;
+  h2 {
+    color: red;
+    color: var(--primary-color);
+  }
+}

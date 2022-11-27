@@ -40,5 +40,23 @@
         "Ihnen"
       ]
     ]
+  },
+  {
+    "title": "Possessiv artikel",
+    "header": [
+      [
+        "",
+        { "text": "Maskulin", "rowSpan": 2 },
+        "feminin",
+        { "text": "neutral", "rowSpan": 2 }
+      ],
+      ["", "Plural"]
+    ],
+    "rows": [
+      ["ich", "mein", "meine", "mein"],
+      ["du", "dein", "deine", "dein"],
+      ["er", "sein", "seine", "sein"],
+      ["sie", "ihr", "ihre", "ihr"]
+    ]
   }
 ]

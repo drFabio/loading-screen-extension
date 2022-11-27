@@ -1,7 +1,14 @@
 .iconButton {
   background: none;
   border: 0;
+  color: inherit;
+  padding: 0;
   &:hover {
     cursor: pointer;
+  }
+  svg {
+    color: inherit;
+    width: 1em;
+    height: 1em;
   }
 }

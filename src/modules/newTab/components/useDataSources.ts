@@ -43,11 +43,12 @@ export function useDataSources(
 
     const dataIndex = Math.floor(Math.random() * chosenSource.data.length);
     const { type, value } = chosenSource.data[dataIndex];
+    const hash = getHashFromItem(value);
+
     const choice =
       type === SourceTypes.EQUIVALENCE
         ? Object.entries(value as EquivalenceInputSource["value"])[0]
         : value;
-    const hash = getHashFromItem(choice);
     choiceRef.current = {
       hash,
       choice,

@@ -24,7 +24,7 @@ export type RowSource = CellSource[];
 export type TableSource = {
   header: RowSource[];
   rows: RowSource[];
-  title?: string;
+  title: string;
 };
 export type TableInputSource = Source<SourceTypes.TABLE, TableSource>;
 

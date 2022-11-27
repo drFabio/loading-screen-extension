@@ -40,10 +40,11 @@ export const useSettings = () => {
   const dynamicSources: InputSource[] = [];
 
   const sources = useMemo(() => {
-    return staticSources.concat(dynamicSources).map(({ title, id }) => ({
+    return staticSources.concat(dynamicSources).map(({ title, id, data }) => ({
       title: title || id,
       id,
       deactivated: !!deactivatedMap[id],
+      data,
     }));
   }, [deactivatedMap, staticSources, dynamicSources]);
 

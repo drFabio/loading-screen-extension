@@ -3,8 +3,16 @@ import { ReactNode } from "react";
 import * as classes from "./IconButton.module.scss";
 
 export type IconButtonProps = {
-  icon: "hide" | "plus" | "minus" | "show";
+  icon:
+    | "hide"
+    | "plus"
+    | "minus"
+    | "show"
+    | "settings"
+    | "folder"
+    | "folderOpen";
   tooltip?: string;
+  hasTooltip?: boolean;
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
@@ -25,10 +33,19 @@ export const IconButton = ({ icon, tooltip, ...props }: IconButtonProps) => {
     case "minus":
       iconComponent = <Unicons.UilMinusCircle />;
       break;
+    case "settings":
+      iconComponent = <Unicons.UilSettings />;
+      break;
+    case "folder":
+      iconComponent = <Unicons.UilFolder />;
+      break;
+    case "folderOpen":
+      iconComponent = <Unicons.UilFolderOpen />;
+      break;
   }
   return (
     <button className={classes.iconButton} {...props}>
-      <span data-tooltip={tooltip}>?</span>
+      {tooltip && <span data-tooltip={tooltip}>?</span>}
       {iconComponent}
     </button>
   );

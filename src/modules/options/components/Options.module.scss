@@ -1,6 +1,4 @@
 .container {
-  background-color: black;
-  color: white;
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
@@ -8,4 +6,9 @@
   h2 {
     color: var(--primary-color);
   }
+}
+.termsContainer {
+  height: 10rem;
+  overflow-y: scroll;
+  scrollbar-color: dark;
 }

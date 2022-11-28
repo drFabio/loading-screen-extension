@@ -145,17 +145,16 @@ describe(`useDataSources`, () => {
       const { result } = renderHook(() =>
         useDataSources(mockSources, configuration)
       );
-
+      /**
+       * The next item after weights, so the index 1 is from 1-6, 0.32 on random
+       * would land into 7 given the element on index 2
+       */
       const expectedData = expectedSource.data[2];
 
       expect(result.current).toEqual(
         expect.objectContaining({
           id: expectedSource.id,
           type: expectedData.type,
-
-          /**
-           * actual index was hidden, it would land on the next one
-           */
           choice: Object.entries(expectedData.value)[0],
         })
       );

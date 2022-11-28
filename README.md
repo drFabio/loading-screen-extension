@@ -2,6 +2,14 @@
 
 A chrome extension that display new information on every tab!
 
+So far it only has the fixed german dataSet but the next goal is probably do some notion integration.
+
+Think of this as the loading screens that appears before a game starts, only it is information you want to learn while you open your 10th mdn tab for the day.
+
+![loading example](./docs/loadingExample.png)
+
+""
+
 ## Development
 
 Run
@@ -26,5 +34,5 @@ For more info check the [tutorial](https://developer.chrome.com/docs/extensions/
 
 ## Tech aspects
 
-This is a series of react apps that compile to a chrome extension through [parcel](https://parceljs.org/).
+This is a series of react apps that compile to a chrome extension through [vite](https://vitejs.dev/).
 It has Typescript, Jest and react testing library for testing

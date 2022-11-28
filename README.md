@@ -8,6 +8,13 @@ Think of this as the loading screens that appears before a game starts, only it 
 
 ![loading example](./docs/loadingExample.png)
 
+## Preview
+
+The extension is unpublished, but you can see it as a page here:
+
+[Main](https://drfabio.github.io/loading-screen-extension-gh-pages/src/modules/newTab/) - Refresh for new words
+[Options](https://drfabio.github.io/loading-screen-extension-gh-pages/src/modules/options/) - Configure options
+
 ""
 
 ## Development

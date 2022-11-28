@@ -27,6 +27,7 @@ export function Tabs() {
     weightMap,
   });
 
+  if (!initialized) return null;
   let container: JSX.Element;
   /**
    * We want to have the same color for the same input

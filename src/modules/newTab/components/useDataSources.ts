@@ -6,11 +6,10 @@ import {
   InputSource,
   SourceConfiguration,
   SourceTypes,
-  StatementInputSource,
   TableSource,
 } from "../../../types";
 
-/**
+/**^
  * Loads the desired data sources returning a "randomized" source to be displayed
  * The sources will respect configuration if given
  * @param sources

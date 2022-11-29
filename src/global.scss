@@ -83,3 +83,11 @@ label:hover,
 input:hover {
   cursor: pointer;
 }
+
+h1,
+h2,
+h3 {
+  color: var(--primary-color);
+  background-color: var(--primary-bg);
+  padding-left: 1em;
+}

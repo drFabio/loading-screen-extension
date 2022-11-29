@@ -16,6 +16,7 @@ jest.mock("../../../getDeterministicPallette", () => ({
 jest.mock("../../../components/useSettings", () => ({
   useSettings: jest.fn(() => ({
     deactivatedMap: { someId: true },
+    initialized: true,
   })),
 }));
 jest.mock("./useDataSources", () => ({

@@ -15,7 +15,7 @@ export const Controls = ({
   onIncrease,
   onDecrease,
   isHidden,
-  weight,
+  weight = 1,
 }: ControlProps) => {
   return (
     <nav className={classes.container}>
@@ -56,7 +56,7 @@ export const Controls = ({
           e.preventDefault();
         }}
       />
-      ({weight || 1})
+      ({weight})
     </nav>
   );
 };
